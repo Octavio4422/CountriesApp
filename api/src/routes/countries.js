@@ -6,17 +6,16 @@ const axios = require("axios");
 router.get("/", routerFunction);
 
 function routerFunction(req, res, next) {
-  const { name } = req.query
-  
-  if(!name){
+  const { name } = req.query;
+
+  if (!name) {
     apiToDb().then((response) => {
       res.status(200).json(response);
     });
   }
 
-  if(name){
-    
-    res.status(200).json('bueno todo anda bien')
+  if (name) {
+    res.status(200).json(name);
   }
 }
 
@@ -36,7 +35,9 @@ async function apiToDb() {
       name: allCountries[i].name.common,
       flags: allCountries[i].flags[0],
       region: allCountries[i].region,
-      capital: allCountries[i].capital? allCountries[i].capital[0]: "Doesnt have",
+      capital: allCountries[i].capital
+        ? allCountries[i].capital[0]
+        : "Doesnt have",
       subregion: allCountries[i].subregion,
       area: allCountries[i].area,
       population: allCountries[i].population,
@@ -47,4 +48,17 @@ async function apiToDb() {
   return response;
 }
 
-module.exports = router;
+// function validateQuery(query){
+  //   if(query === undefined){
+    //     return next();
+    //   }
+    //   return query;
+    // }
+
+    // apiToDb()
+    // .then((response) => {return response.find((r) => r.name === name)})
+    // .then((pais) => validateQuery(pais))
+    // .then((pais) => res.send(pais))
+    
+    module.exports = router;
+    

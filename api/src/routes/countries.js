@@ -2,6 +2,7 @@ const { Router, response } = require("express");
 const { Country } = require("../db");
 const router = Router();
 const axios = require("axios");
+const { Op } = require("sequelize");
 
 router.get("/", routerFunction);
 
@@ -15,7 +16,13 @@ function routerFunction(req, res, next) {
   }
 
   if (name) {
-    res.status(200).json(name);
+    apiToDb();
+    const response = Country.findAll({
+      where :{
+        [Op.substring]: `argentina`,
+      }
+    })
+    response.then((c) => {res.status(200).json(r)})
   }
 }
 
@@ -35,9 +42,7 @@ async function apiToDb() {
       name: allCountries[i].name.common,
       flags: allCountries[i].flags[0],
       region: allCountries[i].region,
-      capital: allCountries[i].capital
-        ? allCountries[i].capital[0]
-        : "Doesnt have",
+      capital: allCountries[i].capital? allCountries[i].capital[0]: "Doesnt have",
       subregion: allCountries[i].subregion,
       area: allCountries[i].area,
       population: allCountries[i].population,
@@ -48,17 +53,4 @@ async function apiToDb() {
   return response;
 }
 
-// function validateQuery(query){
-  //   if(query === undefined){
-    //     return next();
-    //   }
-    //   return query;
-    // }
-
-    // apiToDb()
-    // .then((response) => {return response.find((r) => r.name === name)})
-    // .then((pais) => validateQuery(pais))
-    // .then((pais) => res.send(pais))
-    
-    module.exports = router;
-    
+module.exports = router;

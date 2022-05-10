@@ -1,9 +1,25 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const { TouristActivity } = require("../db");
 const router = Router();
 
-router.post('/', (req,res,next) => {
-    res.send('soy post de activity')
-})
+router.post("/",routerFunction);
+
+async function routerFunction(req, res, next) {
+  const { name, difficulty, duration, season } = req.body;
+  const [activity, created] = await TouristActivity.findOrCreate({
+    where:{ name: name },
+    defaults: {
+        difficulty,
+        duration,
+        season 
+    }
+  });
+
+  if(created){
+    res.status(201).json(activity);
+  }
+}
 
 module.exports = router;
+
+//falta hacer que si ya esta creado no lo cree devuelta jeje

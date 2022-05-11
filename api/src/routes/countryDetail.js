@@ -5,9 +5,18 @@ const router = Router();
 router.get(routerFunction);
 
 //encontrar la forma de que entre
-function routerFunction(req, res, next) {
+async function routerFunction(req, res, next) {
   const { id } = req.params;
-  res.status(200).json(id)
+  const fixedId = id.toUpperCase
+  
+  const response = await Country.findByPk(fixedId);
+
+  if(response === null){
+    next();
+  }
+  if(response){
+    res.status(200).json(response);
+  }
 }
 
 

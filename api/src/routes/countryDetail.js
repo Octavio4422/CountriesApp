@@ -2,14 +2,15 @@ const { Router } = require("express");
 const { Country } = require("../db");
 const router = Router();
 
-router.get(routerFunction);
+router.get('/',routerFunction);
 
 //encontrar la forma de que entre
 async function routerFunction(req, res, next) {
   const { id } = req.params;
-  const fixedId = id.toUpperCase
+  console.log(id)
+  // const fixedId = id.toUpperCase
   
-  const response = await Country.findByPk(fixedId);
+  const response = await Country.findByPk(id);
 
   if(response === null){
     next();

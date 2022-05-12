@@ -1,11 +1,11 @@
 const { Router, response } = require("express");
-const {apiToDb} = require("../functions/apiToDb")
+const { apiToDb } = require("../functions/apiToDb");
+const { queryFinder } = require("../functions/queryFinder");
+const { idFinder } = require("../functions/idFinder");
 const router = Router();
-const { Op } = require("sequelize");
-const { Country } = require("../db");
-
 
 router.get("/", routerFunction);
+router.get("/:id", routerFunctionId);
 
 function routerFunction(req, res, next) {
   const { name } = req.query;
@@ -18,22 +18,23 @@ function routerFunction(req, res, next) {
 
   if (name) {
     queryFinder(name)
-    .then((response) => {
-      res.status(200).json(response);
-    })
+      .then((response) => {
+        res.status(200).json(response);
+      })
+      .catch((error) => next(error));
   }
 }
 
-//Anda a saber que es este error de archivos
+function routerFunctionId(req, res, next) {
+  const { id } = req.params;
+  const fixedId = id.toUpperCase();
+  console.log(fixedId);
 
-async function queryFinder(query){
-  
-  const response = await Country.findAll({
-    where:{
-      [Op.substring]: query,
-    }
-  });
-  return response;
+  idFinder(fixedId)
+    .then((r) => {
+      res.status(200).json(r);
+    })
+    .catch((error) => next(error));
 }
 
 module.exports = router;

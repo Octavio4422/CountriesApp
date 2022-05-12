@@ -9,8 +9,8 @@ const countryIdRoute = require('./countryDetail')
 const router = Router();
 
 // Configurar los routers
+// router.use('/countries/:id', countryIdRoute);
 router.use('/countries', countriesRoute);
-router.use('/countries/:id', countryIdRoute);
 router.use('/activity', activityRoute);
 
 

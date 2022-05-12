@@ -1,7 +1,9 @@
 const { Country } = require("../db");
 const { Op } = require("sequelize");
+const { apiToDb } = require("./apiToDb");
 
 async function queryFinder(query) {
+  await apiToDb();
   let lowerQuery = query.toLowerCase();
   let upperQuery = query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
   console.log(upperQuery);

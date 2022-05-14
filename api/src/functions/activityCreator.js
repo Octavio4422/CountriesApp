@@ -1,6 +1,6 @@
 const { TouristActivity } = require("../db");
 
-async function activityCreator(name, difficulty, duration, season) {
+async function activityCreator(countries, name, difficulty, duration, season) {
   const [activity, created] = await TouristActivity.findOrCreate({
     where: { name: name },
     defaults: {
@@ -10,6 +10,7 @@ async function activityCreator(name, difficulty, duration, season) {
     },
   });
 
+  
   if (created) {
     return activity;
   } else {

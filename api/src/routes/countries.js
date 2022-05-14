@@ -28,7 +28,6 @@ function routerFunction(req, res, next) {
 function routerFunctionId(req, res, next) {
   const { id } = req.params;
   const fixedId = id.toUpperCase();
-  console.log(fixedId);
 
   idFinder(fixedId)
     .then((r) => {

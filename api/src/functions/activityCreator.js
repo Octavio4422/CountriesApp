@@ -1,10 +1,13 @@
 const { Activity, Country } = require("../db");
 const { apiToDb } = require("./apiToDb");
+const { Op } = require("sequelize");
 
 async function activityCreator(countries, name, difficulty, duration, season) {
   await apiToDb();
+  const fixedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  
   const [activity, created] = await Activity.findOrCreate({
-    where: { name: name },
+    where: { name: fixedName },
     defaults: {
       difficulty,
       duration,
@@ -15,7 +18,9 @@ async function activityCreator(countries, name, difficulty, duration, season) {
   for (let i = 0; i < countries.length; i++) {
     const pais = await Country.findOne({
       where: {
-        name: countries[i],
+        name:{
+          [Op.iLike] :countries[i].trim(),
+        } 
       },
     });
 

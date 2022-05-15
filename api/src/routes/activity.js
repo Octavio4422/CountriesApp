@@ -6,6 +6,7 @@ router.post("/", routerFunction);
 
 async function routerFunction(req, res, next) {
   const {countries, name, difficulty, duration, season } = req.body;
+    
   
   try {
     const response = await activityCreator(countries, name, difficulty, duration, season)

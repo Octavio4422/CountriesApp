@@ -9,7 +9,6 @@ router.get("/:id", routerFunctionId);
 
 function routerFunction(req, res, next) {
   const { name } = req.query;
-  const fixedName = name.trim();
 
   if (!name) {
     apiToDb().then((response) => {
@@ -18,6 +17,7 @@ function routerFunction(req, res, next) {
   }
 
   if (name) {
+    const fixedName = name.trim();
     queryFinder(fixedName)
       .then((response) => {
         res.status(200).json(response);

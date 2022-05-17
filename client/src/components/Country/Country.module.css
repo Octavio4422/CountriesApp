@@ -1,0 +1,16 @@
+.Card{
+    border-radius: 10px;
+    width: 80%;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Image{
+    width: 95%;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}

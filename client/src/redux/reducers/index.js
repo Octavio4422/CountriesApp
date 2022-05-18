@@ -1,8 +1,19 @@
-import { CREATE_ACTIVITY, GET_COUNTRIES, GET_COUNTRY, QUERY_COUNTRIES } from "../actions";
+import {
+  CREATE_ACTIVITY,
+  GET_COUNTRIES,
+  GET_COUNTRY,
+  EMPTY_COUNTRY,
+  QUERY_COUNTRIES,
+  ORDER,
+  ORDER_W_RESET,
+} from "../actions";
+
+import orderorder from "../functions";
 
 const initialState = {
   countries: [],
-  country:{},
+  filterCountries: [],
+  country: {},
   activity: {},
 };
 
@@ -12,22 +23,49 @@ function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         countries: payload,
+        filterCountries: payload,
       };
+
     case GET_COUNTRY:
       return {
         ...state,
         country: payload,
       };
+
+      case EMPTY_COUNTRY:
+        return {
+          ...state,
+          country: {}
+        };
+
     case QUERY_COUNTRIES:
       return {
         ...state,
-        countries: payload,
+        filterCountries: payload,
       };
+
     case CREATE_ACTIVITY:
       return {
         ...state,
         activity: payload,
       };
+
+    case ORDER:
+      let newOrder = [...state.filterCountries];
+      newOrder = orderorder(newOrder, payload);
+      return {
+        ...state,
+        filterCountries: [...newOrder],
+      };
+
+    case ORDER_W_RESET:
+      let nwOrder = [...state.countries];
+      nwOrder = orderorder(nwOrder, payload);
+      return {
+        ...state,
+        filterCountries: [...nwOrder],
+      };
+
     default:
       return { ...state };
   }

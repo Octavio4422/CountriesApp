@@ -1,10 +1,10 @@
 import Countries from "../Countries/Countries";
-import SeachBar from "../Finders/SearchBar/SearchBar";
+import Finders from "../Finders/Finders/Finders";
 
 export default function Home() {
   return (
     <div>
-      <SeachBar />
+      <Finders />
       <Countries />
     </div>
   );

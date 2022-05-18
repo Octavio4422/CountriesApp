@@ -5,7 +5,7 @@ import Country from "../Country/Country";
 import styles from "./Countries.module.css";
 
 export default function Countries() {
-  let countries = useSelector((state) => state.countries);
+  let countries = useSelector((state) => state.filterCountries);
 
   let dispatch = useDispatch();
 

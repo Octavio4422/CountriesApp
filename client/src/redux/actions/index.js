@@ -4,6 +4,9 @@ export const GET_COUNTRIES = 'GET_COUNTRIES' ;
 export const GET_COUNTRY = 'GET_COUNTRY';
 export const QUERY_COUNTRIES = 'QUERY_COUNTRIES';
 export const CREATE_ACTIVITY = 'CREATE_ACTIVITY';
+export const ORDER = 'ORDER';
+export const ORDER_W_RESET = 'ORDER_W_RESET';
+export const EMPTY_COUNTRY= 'EMPTY_COUNTRY';
 
 const env = 'localhost:3001'
 
@@ -27,6 +30,12 @@ export const getCountry = (id) => dispatch => {
     })
 }
 
+export const emptyCountry = () => {
+    return{
+        type: EMPTY_COUNTRY
+    }
+}
+
 export const queryCountries = (query) => dispatch => {
     return axios.get(`http://${env}/countries?name=${query}`)
     .then((countries) => {
@@ -43,5 +52,19 @@ export function createActivity(values){
         payload:{
             ...values
         }
+    }
+}
+
+export function order(value){
+    return {
+        type:ORDER,
+        payload:value
+    }
+}
+
+export function orderWReset(value){
+    return {
+        type:ORDER_W_RESET,
+        payload:value
     }
 }

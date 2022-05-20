@@ -24,10 +24,6 @@ export default function Countries() {
               name={c.name}
               flags={c.flags}
               region={c.region}
-              capital={c.capital}
-              subregion={c.subregion}
-              area={c.area}
-              population={c.population}
             />
           );
         })}

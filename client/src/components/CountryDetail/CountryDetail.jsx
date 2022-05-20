@@ -1,42 +1,41 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router"
+import { useParams } from "react-router";
 import { emptyCountry, getCountry } from "../../redux/actions";
+import Country from "../Country/Country";
+import NavBar from "../NavBar/NavBar";
+import styles from "./CountryDetail.module.css"
 
+export default function CountyDetail() {
+  const { id } = useParams();
+  const country = useSelector((state) => state.country);
+  const dispatch = useDispatch();
 
-export default function CountyDetail(){
-    const { id } = useParams();
-    const country = useSelector((state) => state.country);
-    const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCountry(id));
+    return function cleanUp() {
+      dispatch(emptyCountry());
+    };
+  }, []);
 
-    useEffect(() =>{
-        dispatch(getCountry(id))
-        return function cleanUp(){
-            dispatch(emptyCountry())
-        }
-    },[])
-    console.log(country);
+  console.log(country)
 
-
-    return(
-        <div>
-            <h1>{country.name}</h1>
-            <h2>{country.id} </h2>
-            <img src={country.flags} alt='img' />
-            <h2>{country.region}</h2>
-            <h2>{country.subregion}</h2>
-            <h2>{country.area} km</h2>
-            <h2>{country.population} M</h2>
-            <ul>
-                {country.Activities &&
-                 country.Activities.map((a) => {
-                    return(
-                        <li key={a.id}>
-                            {a.name}
-                        </li>
-                    )
-                })}
-            </ul>
-        </div>
-    )
+  return (
+    <div>
+      <NavBar />
+      <div className={styles.Cdetail} >
+        <Country
+          id={country.id}
+          name={country.name}
+          flags={country.flags}
+          region={country.region}
+          capital={country.capital}
+          subregion={country.subregion}
+          area={country.area}
+          population={country.population}
+          activities={country.Activities}
+        />
+      </div>
+    </div>
+  );
 }

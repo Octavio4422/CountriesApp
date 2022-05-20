@@ -1,4 +1,4 @@
-export default function orderorder(array, way){
+export default function orderOrder(array, way){
     if(way === 'ASCENDENTE' || way === "DESCENDENTE" ){
         let response = array.sort((a, b) => {
             if (a.name < b.name) {

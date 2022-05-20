@@ -6,8 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #100B00;
-  /* background-image: './worldwwp.jpg'; */
+  /* background-color: #100B00; */
+  background-image: url('./worldwwp.jpg') ;
   color: white;
 }
 

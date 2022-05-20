@@ -10,7 +10,7 @@ export default function OrderTwo() {
   return (
     <div>
       <select name="select" onChange={onSelect}>
-        <option value="DEFAULT">Default</option>
+        <option value="DEFAULT" selected >All Continents</option>
         <option value="AMERICAS">Americas</option>
         <option value="ANTARCTIC">Antarctic</option>
         <option value="OCEANIA">Oceania</option>

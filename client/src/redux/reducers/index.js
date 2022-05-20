@@ -8,7 +8,7 @@ import {
   ORDER_W_RESET,
 } from "../actions";
 
-import orderorder from "../functions";
+import orderOrder from "../../Functions/oderOrder";
 
 const initialState = {
   countries: [],
@@ -52,7 +52,7 @@ function rootReducer(state = initialState, { type, payload }) {
 
     case ORDER:
       let newOrder = [...state.filterCountries];
-      newOrder = orderorder(newOrder, payload);
+      newOrder = orderOrder(newOrder, payload);
       return {
         ...state,
         filterCountries: [...newOrder],
@@ -60,7 +60,9 @@ function rootReducer(state = initialState, { type, payload }) {
 
     case ORDER_W_RESET:
       let nwOrder = [...state.countries];
-      nwOrder = orderorder(nwOrder, payload);
+      if(payload !== "DEFAULT"){
+        nwOrder = orderOrder(nwOrder, payload);
+      }
       return {
         ...state,
         filterCountries: [...nwOrder],

@@ -18,8 +18,6 @@ export default function CountyDetail() {
     };
   }, []);
 
-  console.log(country)
-
   return (
     <div>
       <NavBar />

@@ -20,6 +20,7 @@ export default function SeachBar(){
                     placeholder='Search Countries'
                     onChange={(e) => setInput(e.target.value)}    
                     />
+                    <button onClick={handleSumbit} >Search</button>
             </form>
         </div>
     )

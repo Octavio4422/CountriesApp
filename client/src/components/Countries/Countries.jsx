@@ -1,18 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCounties } from "../../redux/actions";
 import Country from "../Country/Country";
 import styles from "./Countries.module.css";
 
-export default function Countries() {
-  let countries = useSelector((state) => state.filterCountries);
-
-  let dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getCounties());
-  }, []);
-
+export default function Countries({ countries }) {
   return (
     <ul className={styles.Cards}>
       {countries &&

@@ -1,0 +1,15 @@
+/* .Hole{
+    display:  flex;
+    justify-content: center;
+    padding-top: 20px;
+    background-color: black;
+    width: 30%;
+} */
+
+.Orders{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* justify-content: space-evenly; */
+}

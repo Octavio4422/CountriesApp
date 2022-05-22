@@ -5,10 +5,13 @@ import {
   EMPTY_COUNTRY,
   QUERY_COUNTRIES,
   ORDER,
-  ORDER_W_RESET,
+  ORDER_CONTINENT,
+  ORDER_SEASON,
+  DEFAULT_VALUES,
 } from "../actions";
 
 import orderOrder from "../../Functions/oderOrder";
+import seasonOrder from "../../Functions/seasonOrder";
 
 const initialState = {
   countries: [],
@@ -32,11 +35,11 @@ function rootReducer(state = initialState, { type, payload }) {
         country: payload,
       };
 
-      case EMPTY_COUNTRY:
-        return {
-          ...state,
-          country: {}
-        };
+    case EMPTY_COUNTRY:
+      return {
+        ...state,
+        country: {},
+      };
 
     case QUERY_COUNTRIES:
       return {
@@ -53,19 +56,49 @@ function rootReducer(state = initialState, { type, payload }) {
     case ORDER:
       let newOrder = [...state.filterCountries];
       newOrder = orderOrder(newOrder, payload);
+      if (payload === "") {
+        return {
+          ...state,
+          filterCountries: [...state.filterCountries],
+        };
+      }
       return {
         ...state,
         filterCountries: [...newOrder],
       };
 
-    case ORDER_W_RESET:
-      let nwOrder = [...state.countries];
-      if(payload !== "DEFAULT"){
-        nwOrder = orderOrder(nwOrder, payload);
+    case ORDER_CONTINENT:
+      let continents = [...state.countries];
+      continents = orderOrder(continents, payload);
+      if (payload === "") {
+        return {
+          ...state,
+          filterCountries: [...state.filterCountries],
+        };
       }
       return {
         ...state,
-        filterCountries: [...nwOrder],
+        filterCountries: [...continents],
+      };
+
+    case ORDER_SEASON:
+      let season = [...state.countries];
+      season = seasonOrder(season, payload)
+      if (payload === "") {
+        return {
+          ...state,
+          filterCountries: [...state.filterCountries],
+        };
+      }
+      return{
+        ...state,
+        filterCountries: [...season],
+      }
+
+    case DEFAULT_VALUES:
+      return {
+        ...state,
+        filterCountries: [...state.countries],
       };
 
     default:

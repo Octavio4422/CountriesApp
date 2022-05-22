@@ -1,5 +1,4 @@
 export default function areaParser(area) {
-  console.log(area);
   if (area < 1000) {
     return `${area} KM²`;
   }

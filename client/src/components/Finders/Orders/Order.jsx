@@ -11,6 +11,7 @@ export default function Order() {
   return (
     <div>
       <select name="select" onChange={onSelect}>
+        <option value="" >Select a Distribution</option>
         <option value="ASCENDENTE" >A to Z</option>
         <option value="DESCENDENTE">Z to A</option>
         <option value="POPULATIONMX">Population MAX</option>

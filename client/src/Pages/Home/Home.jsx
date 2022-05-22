@@ -40,7 +40,7 @@ export default function Home() {
           totalCards={countries.length}
           paginate={paginate}
         />
-        <Countries countries={currentCard} />
+        {!countries.length ?<h1>no match results</h1>:<Countries countries={currentCard} /> }
       </div>
     </div>
   );

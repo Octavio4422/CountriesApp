@@ -1,7 +1,6 @@
 export default function populationParser(population) {
-  console.log(population);
   if (population < 1000) {
-    return `${population} M`;
+    return `${population} People`;
   }
 
   let number = population;
@@ -18,5 +17,10 @@ export default function populationParser(population) {
   }
 
   result = result.join("");
+
+  if (population < 1000000) {
+    return `${result} K`;
+  }
+
   return `${result} M`;
 }

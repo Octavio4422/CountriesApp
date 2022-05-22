@@ -31,7 +31,7 @@ export default function CountyDetail() {
           subregion={country.subregion}
           area={country.area}
           population={country.population}
-          activities={country.Activities}
+          Activities={country.Activities}
         />
       </div>
     </div>
